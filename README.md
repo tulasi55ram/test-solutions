@@ -2,7 +2,7 @@
 
 ## task 1 and 2
 
-task 1 and 2 folder contains README.md which contains solutions for task 1 
+task 1 and 2 folder contains README.md which contains solutions for task 1 & 2 
 
 ## task 3
 
