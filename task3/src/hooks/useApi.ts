@@ -6,16 +6,22 @@ import { IApiState } from './types';
  * @param url Contains the URL to fetch the data
  * @returns state Contains the data, isLoading and error
  */
+
+const defaultState: IApiState = { data: null, isLoading: true, error: null };
+
 const useApi = (url: string): IApiState => {
-  const [state, setState] = useState<IApiState>({ data: null, isLoading: true, error: null });
+
+  const [state, setState] = useState<IApiState>(defaultState);
 
   useEffect(() => {
-    let requestActive = true // Handling delay responses from the server
     fetch(url)
       .then(res => res.json())
-      .then(totalData => requestActive && setState({ data: totalData.data, isLoading: false, error: null }))
-      .catch(error => requestActive && setState({ data: null, isLoading: false, error }));
-    return () => { requestActive = false }
+      .then(totalData =>  setState({ data: totalData.data, isLoading: false, error: null }))
+      .catch(error => setState({ data: null, isLoading: false, error }));
+    return () => {
+      // Reset state when the component unmounts
+      setState(defaultState);
+    }
   }, [url]);
 
   return state;
