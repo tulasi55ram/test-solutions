@@ -1,10 +1,10 @@
 import { ReactNode } from 'react' 
 
-export interface IProps {
+export interface IErrorBoundaryProps {
   children: ReactNode;
 }
 
-export interface IState {
-  hasError: boolean;
+export interface IErrorBoundaryState {
+  hasError: boolean
   error: Error | null;
 }

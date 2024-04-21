@@ -1,13 +1,16 @@
 import React from 'react';
+
+// components 
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { ListData } from './components/ListData';
+import { BookingScreen } from './screens/BookingScreen';
+
 
 function App() {
   return (
     <div className="App">
-      <ErrorBoundary>
-        <ListData />
-      </ErrorBoundary>
+        <ErrorBoundary>
+          <BookingScreen />
+        </ErrorBoundary>
     </div>
   );
 }

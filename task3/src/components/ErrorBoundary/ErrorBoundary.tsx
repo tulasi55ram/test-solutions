@@ -1,26 +1,28 @@
-import React, { Component, ErrorInfo } from 'react';
+import React, { Component } from 'react';
+import Typography from '@mui/material/Typography';
 
-import { IProps, IState } from './types';
 
-class ErrorBoundary extends Component<IProps, IState> {
-  state: IState = { hasError: false, error: null };
+import { IErrorBoundaryProps, IErrorBoundaryState } from './types';
 
-  static getDerivedStateFromError(error: Error): IState {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true, error };
+class ErrorBoundary extends Component<IErrorBoundaryProps, IErrorBoundaryState> {
+  constructor(props: IErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false, error: null };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // You can log the error to an error reporting service
-    console.error("Uncaught error:", error, errorInfo);
+  static getDerivedStateFromError(error: Error) {
+    // we can log this error using sentry or any other logging service
+    return { hasError: true, error };
   }
 
   render() {
     if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return <div>Something went wrong: {this.state.error?.message}</div>;
+      return (
+        <Typography variant="h6" color="error">
+          Something went wrong.
+        </Typography>
+      );
     }
-
     return this.props.children;
   }
 }
